@@ -1,0 +1,53 @@
+.sup {
+  position: relative;
+  bottom: 1ex; 
+  font-size: 90%;
+  /* background-color:red;
+  border-radius: 50% */
+}
+
+
+
+
+.cat-wrapper {
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.822);
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  z-index: 10000;
+  visibility: hidden;
+  padding: 50px 0px 40px 0;
+  color: gray;
+}
+.cat-wrapper.active {
+  visibility: visible;
+  
+}
+.cat-list {
+  display: flex;
+  flex-direction: column;
+}
+.cat-heading {
+  font-size: 1.4rem;
+}
+a.cat-link {
+  text-decoration: none;
+}
+
+.cat-link-wrapper {
+  background-color: rgb(214, 231, 231);
+  padding: 10px;
+  transition: linear 0.2s;
+}
+
+.cat-link-wrapper:hover {
+  background-color: aliceblue;
+  padding: 20px;
+}
+.fas.hamburger {
+  font-size: 2rem;
+  color: aliceblue;
+  transition: linear 0.2s;
+}
