@@ -8,7 +8,8 @@ from rest_framework import status
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 
-@api_view(['POST'])
+from django.core.mail import message, send_mail
+
 @permission_classes([IsAuthenticated])
 @csrf_exempt
 def addOrderItems(request):
@@ -57,6 +58,19 @@ def addOrderItems(request):
 
         product.countInStock -= item.qty
         product.save()
+
+
+# # send mail to the admin to take notice of this order
+
+#     subject = "A new order is placed just now"
+#     message = 'This message is sent to you to make you aware of the new order placed just now by user '+user +'of '
+#     send_mail(
+#     'Subject here',
+#     'Here is the message.',
+#     'from@example.com',
+#     ['to@example.com'],
+#     fail_silently=False,
+# )
 
     serializer = OrderSerializer(order, many=False)
     return Response(serializer.data)

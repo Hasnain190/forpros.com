@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { googleAuthenticate } from '../../actions/userActions'
+import { getUserDetails, googleAuthenticate } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
 
 import queryString from 'query-string';
@@ -20,7 +20,9 @@ function GoogleScreen() {
         dispatch(googleAuthenticate(state, code))
         
         
-    }, [location , dispatch]);
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location  ]);
 
     return (
         <div className='container'>

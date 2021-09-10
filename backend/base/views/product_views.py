@@ -2,9 +2,21 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-from base.serializers import ProductSerializer ,ProductCategorySerializer 
-from base.models import Product, ProductCatogory, Review
+from base.serializers import MediaSerializer, ProductSerializer ,ProductCategorySerializer 
+from base.models import Product, ProductCatogory, Review , Media
 from rest_framework import status
+
+# test case
+
+@api_view(['GET'])
+@authentication_classes([]) 
+@permission_classes([]) 
+def getMedia(request):
+   
+    media = Media.objects.all()
+    serializer = MediaSerializer(media, many=True)
+
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -93,16 +105,28 @@ def updateProduct(request, pk):
 @api_view(['POST'])
 @authentication_classes([]) 
 @permission_classes([]) 
-def uploadImage(request):
+def uploadMedia(request):
     data = request.data
 
     product_id = data['product_id']
     product = Product.objects.get(_id=product_id)
+    media = Media.objects.get(product = product)
+
+    media.bannerImage =  request.FILES.get('banner-image')
+    media.image3 =  request.FILES.get('image3')
+    media.image4 =  request.FILES.get('image4')
+    media.image5 =  request.FILES.get('image5')
+    media.video =  request.FILES.get('video')
+
+    media.save()
+    
+
 
     product.image = request.FILES.get('image')
+    print(request.FILES)
     product.save()
 
-    return Response('Image was uploaded')
+    return Response('Media is uploaded')
 
 
 @api_view(['POST'])

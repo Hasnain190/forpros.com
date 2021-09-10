@@ -49,7 +49,7 @@ import TermsAndConditionsScreen from './screens/BlogScreens/TermsAndConditionsSc
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, useLocation } from 'react-router-dom'
 // import sidebar from ''
-
+import './scss/style.scss'
 
 function App() {
 

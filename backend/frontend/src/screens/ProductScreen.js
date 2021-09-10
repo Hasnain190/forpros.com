@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -19,18 +19,14 @@ function ProductScreen({ match, history }) {
     const productDetails = useSelector(state => state.productDetails)
     const { error, loading, product } = productDetails
 
-
-
+    const productMedia = useSelector(state => state.productDetails.product.media)
+  
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
 
-
-
-
-
     const dispatch = useDispatch()
-
+    const imageRef = useRef(null)
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -48,8 +44,6 @@ function ProductScreen({ match, history }) {
         history.push(`/wishlist/${match.params.id}`)
     }
 
-
-
     useEffect(() => {
         if (successProductReview) {
             setComment('')
@@ -57,6 +51,8 @@ function ProductScreen({ match, history }) {
             dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
         }
         dispatch(listProductDetails(match.params.id))
+
+
     }, [dispatch, match, successProductReview]
     )
 
@@ -69,7 +65,11 @@ function ProductScreen({ match, history }) {
         }
         ))
     }
-
+   
+   
+    const mediaChangeHandler = (src) => {
+        imageRef.current.src = src
+    }
 
     return (
         <div>
@@ -82,7 +82,45 @@ function ProductScreen({ match, history }) {
                             <Row  >
 
                                 <Col md={6}>
-                                    <Image src={product.image} alt={product.name} fluid />
+                                    <Image src={product.image} alt={product.name}  ref={imageRef} fluid />
+                                    <Row md={3} className="container-fluid">
+                                        {productMedia &&
+                                            <ListGroup variant="flush">
+                                                {
+                                                    productMedia[0]?.image3 && <ListGroup.Item >
+
+                                                        <Image src={productMedia[0].image3} alt={productMedia[0].image3}  onClick={(e)=>{mediaChangeHandler(e.target.src)}}  fluid />
+
+                                                    </ListGroup.Item>
+                                                }
+
+                                                {
+                                                    productMedia[0]?.image4 && <ListGroup.Item >
+
+                                                        <Image src={productMedia[0].image4} alt={productMedia[0].image5}  onClick={(e)=>{mediaChangeHandler(e.target.src)}}  fluid />
+
+                                                    </ListGroup.Item>
+                                                }
+                                                {
+                                                    productMedia[0]?.image5 && <ListGroup.Item >
+
+                                                        <Image src={productMedia[0].image5} alt={productMedia[0].image5}  onClick={(e)=>{mediaChangeHandler(e.target.src)}}  fluid />
+
+                                                    </ListGroup.Item>
+                                                }
+                                                {
+                                                    productMedia[0]?.video && <ListGroup.Item >
+
+                                                        <video width="300" controls   >
+                                                            <source src={productMedia[0].video} type="video/mp4" />
+                                                        </video>
+                                                    </ListGroup.Item>
+                                                }
+
+                                            </ListGroup>
+                                        }
+                                    </Row>
+
                                 </Col>
                                 <Col md={3}>
                                     <ListGroup variant="flush">
@@ -153,23 +191,24 @@ function ProductScreen({ match, history }) {
 
                                             <ListGroup.Item>
                                                 <>
-                                                <Button
-                                                    onClick={addToCartHandler}
+                                                    <Button
+                                                        onClick={addToCartHandler}
 
-                                                    className='btn-block'
-                                                    disabled={product.countInStock === 0}
-                                                    type='button'>
-                                                    Add to Cart
-                                                </Button>
-                                                <p></p>
-                                                <Button
-                                                    onClick={addToWishlistHandler}
+                                                        className='btn-block'
+                                                        disabled={product.countInStock === 0}
+                                                        type='button'>
+                                                        Add to Cart
+                                                    </Button>
+                                                    <p></p>
+                                                    <Button
+                                                        onClick={addToWishlistHandler}
 
-                                                    className='btn-block'
-                                                    disabled={product.countInStock === 0}
-                                                    type='button'>
-                                                    Add to Wishlist
-                                                </Button>
+                                                        className='btn-block'
+                                                        disabled={product.countInStock === 0}
+                                                        type='button'>
+                                                        Add to Wishlist
+                                                    </Button>
+
                                                 </>
                                             </ListGroup.Item>
                                         </ListGroup>

@@ -121,7 +121,7 @@ function Header() {
 
                                 </NavDropdown>
                             )}
-                            <Nav.Item  ><i  className={sidebar ? "fas fa-times hamburger px-4" : "fas fa-bars hamburger px-4 display-hidden"} onClick={showSidebar} /></Nav.Item>
+                            <Nav.Item  ><i  className={sidebar ? "fas fa-times hamburger px-4" : "fas fa-bars hamburger px-4 display-hidden"} style = {sidebar ? {display :'none'}: {display:''}}onClick={showSidebar} /></Nav.Item>
 
                         </Nav>
                     </Navbar.Collapse>

@@ -180,7 +180,7 @@ export const createProduct = () => async (dispatch, getState) => {
 
 
 export const updateProduct = (product) => async (dispatch, getState) => {
-    try {
+try {
         dispatch({
             type: PRODUCT_UPDATE_REQUEST
         })
@@ -192,7 +192,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `JWT ${userInfo.token}`
+                'Authorization': `JWT ${userInfo.token}`
             }
         }
 

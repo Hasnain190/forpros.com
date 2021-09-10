@@ -29,6 +29,7 @@ function RegisterScreen({ location, history }) {
 
             window.location.replace(res.data.authorization_url);
         } catch (err) {
+            console.log(err)
 
         }
     };

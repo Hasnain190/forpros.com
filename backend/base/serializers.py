@@ -76,9 +76,11 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_media(self,obj):
         media = obj.media_set.all()
-        serializers = MediaSerializer(media, many = False)
+        serializers = MediaSerializer(media, many = True)
         return serializers.data
-    
+
+
+
 class MediaSerializer(serializers.ModelSerializer):
 
     class Meta:

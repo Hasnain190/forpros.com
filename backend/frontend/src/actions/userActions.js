@@ -129,11 +129,7 @@ export const register = (username, email, password, re_password) => async (dispa
         })
 
 
-        // const { data } = await axios.post(
-        //     '/api/users/register/',
-        //     { 'name': name, 'email': email, 'password': password },
-        //     config
-        // )
+      
 
 
         // const body = JSON.stringify({ username, email, password });
@@ -168,14 +164,12 @@ export const activate = (uid, token) => async (dispatch) => {
             type: USER_ACTIVATE_REQUEST
         })
 
-        // const {
-        //     userLogin: { userInfo },
-        // } = getState()
+        
 
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                // 'Authorization': `JWT ${userInfo.token}`
+               
             }
         }
         const body = JSON.stringify({ uid, token });
@@ -226,8 +220,18 @@ export const googleAuthenticate = (state, code) => async dispatch => {
                 type: GOOGLE_AUTH_SUCCESS,
                 payload: data
             });
-            console.log('it have reached up to here')
-            dispatch(getUserDetails());
+            
+            // dispatch(getUserDetails());
+            dispatch({
+                type: USER_LOGIN_SUCCESS,
+                payload: {
+                    token: data.access,
+                    refresh: data.refresh,
+                    access: data.access,
+                    email: data.user,
+                    name: data.user
+                }
+            })
         } catch (error) {
             dispatch({
                 type: GOOGLE_AUTH_FAIL,
@@ -249,13 +253,15 @@ export const getUserDetails = () => async (dispatch, getState) => {
             userLogin: { userInfo },
         } = getState()
 
+       
+
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': `JWT ${userInfo.token ? userInfo.access_token : userInfo.access }`
+                'Authorization': `JWT ${userInfo.token}`
             }
         }
-        //  `/api/users/${id}/`
+       
         const { data } = await axios.get('/auth/users/me/',
             config
         )

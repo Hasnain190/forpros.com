@@ -18,12 +18,18 @@ function ProductEditScreen({ match, history }) {
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
+    const [bannerImage, setBannerImage] = useState('')
+    const [image3, setImage3] = useState('')
+    const [image4, setImage4] = useState('')
+    const [image5, setImage5] = useState('')
+    const [video, setVideo] = useState('')
     const [brand, setBrand] = useState('')
     const [category, setCategory] = useState('')
     const [Featured, setFeatured] = useState(false)
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
     const [uploading, setUploading] = useState(false)
+
     const dispatch = useDispatch()
 
     const productDetails = useSelector(state => state.productDetails)
@@ -52,12 +58,16 @@ function ProductEditScreen({ match, history }) {
                 setName(product.name)
                 setPrice(product.price)
                 setImage(product.image)
+                setBannerImage(product.media.bannerImage)
+                setImage3(product.media.image3)
+                setImage4(product.media.image4)
+                setImage5(product.media.image5)
+                setVideo(product.media.video)
                 setBrand(product.brand)
                 setFeatured(product.Featured)
                 setCategory(product.category)
                 setCountInStock(product.countInStock)
                 setDescription(product.description)
-                // console.log(product.Featured)
 
             }
         }
@@ -72,14 +82,14 @@ function ProductEditScreen({ match, history }) {
             _id: productId,
             name,
             price,
-            image,
+            image, bannerImage, image3, image4, image5, video,
             Featured,
             brand,
             category,
             countInStock,
             description
         }))
-     
+
     }
 
     const includeCategoryHandler = async (categoryId, productId) => {
@@ -87,6 +97,7 @@ function ProductEditScreen({ match, history }) {
         setCategory(product.category)
 
     }
+    
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
         const formData = new FormData()
@@ -94,6 +105,7 @@ function ProductEditScreen({ match, history }) {
         formData.append('image', file)
         formData.append('product_id', productId)
 
+        console.log(e.target.files[0])
         setUploading(true)
 
         try {
@@ -157,7 +169,7 @@ function ProductEditScreen({ match, history }) {
 
 
                             <Form.Group controlId='image'>
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label>Default Image</Form.Label>
                                 <Form.Control
 
                                     type='text'
@@ -179,7 +191,109 @@ function ProductEditScreen({ match, history }) {
 
                             </Form.Group>
 
+                            <Form.Group controlId='image'>
+                                <Form.Label>Image - 2 </Form.Label>
+                                <Form.Control
 
+                                    type='text'
+                                    placeholder='Enter image'
+                                    value={image3}
+                                    onChange={(e) => setImage(e.target.value)}
+                                >
+                                </Form.Control>
+
+                                <Form.File
+                                    id='image-file'
+                                    label=''
+                                    // custom
+                                    onChange={uploadFileHandler}
+                                >
+
+                                </Form.File>
+                                {uploading && <Loader />}
+
+                            </Form.Group>
+
+                            <Form.Group controlId='image'>
+                                <Form.Label>Image - 3</Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder='Enter image'
+                                    value={image4}
+                                    onChange={(e) => setImage(e.target.value)}
+                                >
+                                </Form.Control>
+
+                                <Form.File
+                                    id='image-file'
+                                    label=''
+                                    // custom
+                                    onChange={uploadFileHandler}
+                                >
+
+                                </Form.File>
+                                {uploading && <Loader />}
+
+                            </Form.Group>
+                            <br />
+                            <Form.Group controlId='Featured'>
+                                <Form.Check
+                                    type='checkbox'
+                                    label='Add to Featured'
+                                    checked={Featured}
+                                    onChange={(e) => setFeatured(e.target.checked)}
+                                >
+                                </Form.Check>
+                            </Form.Group>
+
+                            <br />
+                            {Featured &&
+
+                                <Form.Group controlId='image'>
+                                    <Form.Label>Banner Image</Form.Label>
+                                    <Form.Control
+
+                                        type='text'
+                                        placeholder='Enter banner Image'
+                                        value={bannerImage}
+                                        onChange={(e) => setImage(e.target.value)}
+                                    >
+                                    </Form.Control>
+                                    <Form.File
+                                        id='image-file'
+                                        label=''
+                                        // custom
+                                        onChange={uploadFileHandler}
+                                    >
+
+                                    </Form.File>
+                                    {uploading && <Loader />}
+
+                                </Form.Group>
+                            }
+                            <Form.Group controlId='image'>
+                                <Form.Label>Add Video 📺</Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder='Enter video'
+                                    value={video}
+                                    onChange={(e) => setImage(e.target.value)}
+                                >
+                                </Form.Control>
+
+                                <Form.File
+                                    id='image-file'
+                                    label=''
+                                    // custom
+                                    onChange={uploadFileHandler}
+                                >
+
+                                </Form.File>
+                                {uploading && <Loader />}
+
+                            </Form.Group>
                             <Form.Group controlId='brand'>
                                 <Form.Label>Brand</Form.Label>
                                 <Form.Control
@@ -191,15 +305,11 @@ function ProductEditScreen({ match, history }) {
                                 >
                                 </Form.Control>
                             </Form.Group>
-                            <Form.Group controlId='Featured'>
-                                <Form.Check
-                                    type='checkbox'
-                                    label='Add to Featured'
-                                    checked={Featured}
-                                    onChange={(e) => setFeatured(e.target.checked)}
-                                >
-                                </Form.Check>
-                            </Form.Group>
+
+
+
+
+
                             <Form.Group controlId='countinstock'>
                                 <Form.Label>Stock</Form.Label>
                                 <Form.Control

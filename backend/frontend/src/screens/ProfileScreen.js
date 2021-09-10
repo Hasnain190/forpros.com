@@ -30,13 +30,13 @@ function  ProfileScreen({ history }) {
 
     const orderListMy = useSelector(state => state.orderListMy)
     const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
-
-
+// || userInfo._id !== user._id 
+// || !user.name || 
     useEffect(() => {
         if (!userInfo) {
             history.push('/login')
         } else {
-            if (!user || !user.name || success || userInfo._id !== user._id ) {
+            if (!user || success ) {
                 dispatch({ type: USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails())
                 dispatch(listMyOrders())
@@ -45,7 +45,7 @@ function  ProfileScreen({ history }) {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, history, userInfo,user,success])
+    }, [dispatch, history, success, user, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
