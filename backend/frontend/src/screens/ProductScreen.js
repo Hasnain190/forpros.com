@@ -20,7 +20,7 @@ function ProductScreen({ match, history }) {
     const { error, loading, product } = productDetails
 
     const productMedia = useSelector(state => state.productDetails.product.media)
-  
+
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
@@ -65,10 +65,19 @@ function ProductScreen({ match, history }) {
         }
         ))
     }
-   
-   
+
+
     const mediaChangeHandler = (src) => {
         imageRef.current.src = src
+    }
+    const [position, setPosition] = useState({ backgroundPosition: '0% 0%' })
+
+
+    const handleMouseMove = e => {
+        const { left, top, width, height } = e.target.getBoundingClientRect()
+        const x = (e.pageX - left) / width * 100
+        const y = (e.pageY - top) / height * 100
+        setPosition({ backgroundPosition: `${x}% ${y}%` })
     }
 
     return (
@@ -82,14 +91,17 @@ function ProductScreen({ match, history }) {
                             <Row  >
 
                                 <Col md={6}>
-                                    <Image src={product.image} alt={product.name}  ref={imageRef} fluid />
+                                    <figure onMouseMove={handleMouseMove} style={position}>
+
+                                        <Image src={product.image} alt={product.name} ref={imageRef} fluid />
+                                    </figure>
                                     <Row md={3} className="container-fluid">
                                         {productMedia &&
                                             <ListGroup variant="flush">
                                                 {
                                                     productMedia[0]?.image3 && <ListGroup.Item >
 
-                                                        <Image src={productMedia[0].image3} alt={productMedia[0].image3}  onClick={(e)=>{mediaChangeHandler(e.target.src)}}  fluid />
+                                                        <Image src={productMedia[0].image3} alt={productMedia[0].image3} onClick={(e) => { mediaChangeHandler(e.target.src) }} fluid />
 
                                                     </ListGroup.Item>
                                                 }
@@ -97,14 +109,14 @@ function ProductScreen({ match, history }) {
                                                 {
                                                     productMedia[0]?.image4 && <ListGroup.Item >
 
-                                                        <Image src={productMedia[0].image4} alt={productMedia[0].image5}  onClick={(e)=>{mediaChangeHandler(e.target.src)}}  fluid />
+                                                        <Image src={productMedia[0].image4} alt={productMedia[0].image5} onClick={(e) => { mediaChangeHandler(e.target.src) }} fluid />
 
                                                     </ListGroup.Item>
                                                 }
                                                 {
                                                     productMedia[0]?.image5 && <ListGroup.Item >
 
-                                                        <Image src={productMedia[0].image5} alt={productMedia[0].image5}  onClick={(e)=>{mediaChangeHandler(e.target.src)}}  fluid />
+                                                        <Image src={productMedia[0].image5} alt={productMedia[0].image5} onClick={(e) => { mediaChangeHandler(e.target.src) }} fluid />
 
                                                     </ListGroup.Item>
                                                 }
