@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'djoser',
     'base.apps.BaseConfig',
+    'storages',
 
     'corsheaders',
     'social_django'
@@ -211,3 +212,11 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR /  'frontend/build/static'
 ]
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID  = 'AKIAXAUIMV4EXBT7NOUB'
+AWS_SECRET_ACCESS_KEY  = '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'
+
+AWS_STORAGE_BUCKET_NAME  = 'testura'
+AWS_QUERYSTRING_AUTH = False
