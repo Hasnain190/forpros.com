@@ -169,7 +169,7 @@ function ProductEditScreen({ match, history }) {
 
 
                             <Form.Group controlId='image'>
-                                <Form.Label>Default Image</Form.Label>
+                                <Form.Label>Main Image</Form.Label>
                                 <Form.Control
 
                                     type='text'
