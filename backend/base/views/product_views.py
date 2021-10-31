@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from base.serializers import MediaSerializer, ProductSerializer ,ProductCategorySerializer 
 from base.models import Product, ProductCatogory, Review , Media
 from rest_framework import status
-
+from django.shortcuts import get_object_or_404
 # test case
 
 @api_view(['GET'])
@@ -109,20 +109,24 @@ def uploadMedia(request):
     data = request.data
 
     product_id = data['product_id']
+    print(product_id)
     product = Product.objects.get(_id=product_id)
-    media = Media.objects.get(product = product)
+    print(product)
+    # media = get_object_or_404(Media,product = product)
+    media = Media.objects.filter(product = product)
+    
 
+    product.image = request.FILES.get('image')
     media.bannerImage =  request.FILES.get('banner-image')
     media.image3 =  request.FILES.get('image3')
     media.image4 =  request.FILES.get('image4')
     media.image5 =  request.FILES.get('image5')
     media.video =  request.FILES.get('video')
 
-    media.save()
+    # media.save()
     
 
 
-    product.image = request.FILES.get('image')
     print(request.FILES)
     product.save()
 

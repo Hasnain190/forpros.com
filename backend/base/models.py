@@ -115,7 +115,7 @@ class Media(models.Model):
     image5 = models.ImageField(null=True, blank=True,
                                default='/placeholder.png')
 
-    video = models.FileField(null=True, blank=True,)
+    video = models.FileField(null=True, blank=True)
 
     def __str__(self) -> str:
         return (self.product.name + " 's media files") 

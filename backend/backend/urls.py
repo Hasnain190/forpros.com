@@ -24,7 +24,7 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('django/admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
@@ -35,7 +35,6 @@ urlpatterns = [
     path('api/orders/', include('base.urls.order_urls')),
     path('api/wishlist/', include('base.urls.wishlist_urls')),
     path('api/category/', include('base.urls.category_urls')),
-
 
 ]
 
