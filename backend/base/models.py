@@ -118,5 +118,5 @@ class Media(models.Model):
     video = models.FileField(null=True, blank=True)
 
     def __str__(self) -> str:
-        return (self.product.name + " 's media files") 
+        return (self.product.name + " 's media Files") 
 
