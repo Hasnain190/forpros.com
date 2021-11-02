@@ -67,8 +67,7 @@ function Header() {
 
                 <LinkContainer to='/'>
                     <Navbar.Brand >
-                        Usama
-                        Computers
+negozio
 
                     </Navbar.Brand>
                 </LinkContainer>

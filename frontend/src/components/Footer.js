@@ -59,17 +59,17 @@ function Footer() {
                     <h2>Contact Info</h2>
 
                     <ul className="info">
-                        <li>
+                        {/* <li>
                             <span><i class="fas fa-map-marker-alt"></i></span>
                             <span><a href="https://goo.gl/maps/9C5xdh5W1XVihmb48" target='_blank' rel="noreferrer"> D-XXX , Thermal Power Station <br />Muzzaffargarh 34200 <br />Pakistan</a></span>
-                        </li>
+                        </li> */}
                         <li>
                             <span><i class="fas fa-phone-alt"></i></span>
-                            <p><a href="tel:923174373258">+92 317 4373258</a></p>
+                            <p><a href="tel:923174373258">+92 311 7907036</a></p>
                         </li>
                         <li>
                             <span><i class="far fa-envelope"></i></span>
-                            <p><a href="mailto:itsusamaashfaq@gmail.com">itsusamaashfaq@gmail.com</a></p>
+                            <p><a href="mailto:s20755753@gmail.com">s20755753@gmail.com</a></p>
                         </li>
 
 
