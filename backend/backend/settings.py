@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-jyhhr)v0kyrb+^ifdlio=p3mo&l=$(^an7xb&fow--z^rxd7^r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost','negoziohub.herokuapp.com']
 
 
 # Application definition
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 import os
 ROOT_URLCONF = 'backend.urls'
@@ -104,7 +104,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = '94.mbbs.2@gmail.com'
-EMAIL_HOST_PASSWORD = 'Asd890ml'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD (for 94.mbbs.2@gmail.com in django app)')
 EMAIL_USE_TLS = True
 
 
@@ -206,7 +206,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
-MEDIA_ROOT = "static/images"
+MEDIA_ROOT = BASE_DIR / "static/images"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -215,8 +216,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID  = 'AKIAXAUIMV4EXBT7NOUB'
-AWS_SECRET_ACCESS_KEY  = '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'
+AWS_ACCESS_KEY_ID  = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY  = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 AWS_STORAGE_BUCKET_NAME  = 'testura'
 AWS_QUERYSTRING_AUTH = False
+
+
+if os.getcwd() == '/app':
+    DEBUG = False
