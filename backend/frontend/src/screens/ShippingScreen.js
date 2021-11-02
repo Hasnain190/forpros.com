@@ -71,7 +71,7 @@ function ShippingScreen({ history }) {
                         required
                         type='text'
                         placeholder='Enter country'
-                        value={country ? country : 'Pakistan'}
+                        value={country ? country : ''}
                         onChange={(e) => setCountry(e.target.value)}
                     >
                     </Form.Control>

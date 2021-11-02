@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.core.mail import message, send_mail
 
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
 def addOrderItems(request):
