@@ -67,7 +67,7 @@ function Header() {
 
                 <LinkContainer to='/'>
                     <Navbar.Brand >
-negozio
+negozio.
 
                     </Navbar.Brand>
                 </LinkContainer>
