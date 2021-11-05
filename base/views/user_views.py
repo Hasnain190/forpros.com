@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
@@ -15,11 +15,13 @@ from rest_framework import status
 
 from base.serializers import  UserSerializer , UserSerializerWithToken
 
-# from django.conf import settings
-# User = settings.AUTH_USER_MODEL
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 # from django.contrib.auth import get_user_model
 # User = get_user_model()
 
+
+import requests
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -39,6 +41,29 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+
+@api_view(["GET"])
+@permission_classes([])
+
+@authentication_classes([]) 
+def activate(request, uid, token):
+    """ 
+    Intermediate view to activate a user's email. 
+    """
+    headers={'Authorization': 'JWT ' + token}
+    protocol = 'https://' if request.is_secure() else 'http://'
+    web_url = protocol + request.get_host()
+    post_url = web_url + "/auth/users/activation/"
+    post_data = {'uid': uid, 'token': token}
+    result = requests.post(post_url, headers=headers, data = post_data)
+    content = result.text
+    print(content)
+
+    return Response(content)
+
+
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])

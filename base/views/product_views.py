@@ -6,7 +6,7 @@ from base.serializers import MediaSerializer, ProductSerializer ,ProductCategory
 from base.models import Product, ProductCatogory, Review , Media
 from rest_framework import status
 from django.shortcuts import get_object_or_404
-# test case
+
 
 @api_view(['GET'])
 @authentication_classes([]) 

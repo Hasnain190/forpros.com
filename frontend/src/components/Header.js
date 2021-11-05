@@ -16,7 +16,7 @@ const useClickOutside = (handler) => {
                 handler()
             }
         }
-// const div = domNode.current
+
         document.addEventListener('mousedown', mayBeHandler)
 
         return () => {
@@ -46,7 +46,13 @@ function Header() {
 
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
-    const noOfItems = cartItems.length
+    const noOfCartItems = cartItems.length
+
+
+    // const fav = useSelector(state => state.whishlist)
+    // const { whishlistItems } = fav
+    // const noOfFavItems = whishlistItems.length
+    
 
     // const domNode = useRef()
 
@@ -78,10 +84,10 @@ negozio.
                         <Nav className= " ms-auto">
 
                             <LinkContainer to='/cart' className= "px-4"  >
-                                <Nav.Link ><span className='sup '>{noOfItems}</span><i className="fas fa-shopping-cart"></i></Nav.Link>
+                                <Nav.Link ><span className='sup '>{noOfCartItems}</span><i className="fas fa-shopping-cart"></i></Nav.Link>
                             </LinkContainer>
                             <LinkContainer to='/wishlist' className= "px-4"  >
-                                <Nav.Link ><i className="fas fa-heart"></i></Nav.Link>
+                                <Nav.Link ><span className='sup '></span><i className="fas fa-heart"></i></Nav.Link>
                             </LinkContainer>
 
                             {userInfo ? (

@@ -1,15 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+
+class User(AbstractUser):
+    """Add more fields to default user model."""
+
+    # profile_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+
+
 
 
 class ProductCatogory(models.Model):
+    """ category for products """
     product_category = models.CharField(max_length=200, null=True, blank=True, default='Electronics')
 
     def __str__(self):
         return self.product_category
 
 class Product(models.Model):
+    """Our main product"""
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True,
@@ -27,11 +41,15 @@ class Product(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
+    wishList = models.ManyToManyField(User, related_name='WishList')
+
+
     def __str__(self):
         return self.name
 
 
 class Review(models.Model):
+    """review added by the user"""
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -46,6 +64,7 @@ class Review(models.Model):
 
 
 class Order(models.Model):
+    """order made by the user"""
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     paymentMethod = models.CharField(max_length=200, null=True, blank=True)
     taxPrice = models.DecimalField(
@@ -67,6 +86,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    '''order item'''
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -81,14 +101,16 @@ class OrderItem(models.Model):
 
 
 class WishList(models.Model):
+    """wishlist for the user"""
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.createdAt)
+        return str(self.user.username)
 
 class ShippingAddress(models.Model):
+    """shipping address for the user"""
     order = models.OneToOneField(
         Order, on_delete=models.CASCADE, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
@@ -104,6 +126,7 @@ class ShippingAddress(models.Model):
 
 
 class Media(models.Model):
+    """media for the product"""
     product =  models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     bannerImage = models.ImageField(null=True, blank=True,
                                default='/placeholder.png')
@@ -119,4 +142,3 @@ class Media(models.Model):
 
     def __str__(self) -> str:
         return (self.product.name + " 's media Files") 
-

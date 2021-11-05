@@ -159,12 +159,7 @@ export const register = (username, email, password, re_password) => async (dispa
 }
 
 export const activate = (uid, token) => async (dispatch) => {
-    try {
-        dispatch({
-            type: USER_ACTIVATE_REQUEST
-        })
 
-        
 
         const config = {
             headers: {
@@ -178,6 +173,13 @@ export const activate = (uid, token) => async (dispatch) => {
             config
         )
 
+
+    try {
+        dispatch({
+            type: USER_ACTIVATE_REQUEST
+        })
+
+        
         dispatch({
             type: USER_ACTIVATE_SUCCESS,
             payload: data
@@ -190,9 +192,7 @@ export const activate = (uid, token) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: USER_ACTIVATE_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
-                : error.message,
+            payload:console.log(error,data , 'bt favfavfaFavfavg')
         })
     }
 }
