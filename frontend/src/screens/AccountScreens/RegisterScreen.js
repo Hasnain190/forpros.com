@@ -6,7 +6,7 @@ import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
 import { register } from '../../actions/userActions'
-import axios from 'axios'
+
 
 function RegisterScreen({ location, history }) {
 
@@ -23,16 +23,6 @@ function RegisterScreen({ location, history }) {
     const userRegister = useSelector(state => state.userRegister)
     const { error, loading, userInfo } = userRegister
 
-    const continueWithGoogle = async () => {
-        try {
-            const res = await axios.get(`http://127.0.0.1:8000/auth/o/google-oauth2/?redirect_uri=http://127.0.0.1:8000/google`)
-
-            window.location.replace(res.data.authorization_url);
-        } catch (err) {
-            console.log(err)
-
-        }
-    };
 
     useEffect(() => {
         if (userInfo) {
@@ -121,15 +111,7 @@ function RegisterScreen({ location, history }) {
                 </Col>
             </Row>
 
-            <Row className='py-3'>
-                <Col>
-                <button className="btn btn-outline-danger rounded-pill" onClick = {continueWithGoogle}>
-                <i class="fab fa-google p-1"></i>
-                    Continue with GOOGLE
-                </button>
-                  
-                </Col>
-            </Row>
+          
 
         </FormContainer >
     )
