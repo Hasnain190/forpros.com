@@ -125,8 +125,7 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['https://negoziohub.herokuapp.com/google', 'http://127.0.0.1:8000/facebook'],
-
+  
     'SERIALIZERS': {
         'user_create': 'base.serializers.UserSerializer',
         'user': 'base.serializers.UserSerializer',

@@ -167,7 +167,7 @@ export const activate = (uid, token) => async (dispatch) => {
         }
         const body = JSON.stringify({ uid, token });
 
-        const { data } = await axios.post(`/auth/users/activation/`, body,
+        const { data } = await axios.post(`/api/users/activate/`, body,
             config
         )
 

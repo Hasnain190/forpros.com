@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from django.shortcuts import redirect
 # from django.contrib.auth.models import User
 
 from django.contrib.auth.hashers import make_password
@@ -44,14 +44,16 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 @permission_classes([])
 
 @authentication_classes([]) 
-def activate(request, uid, token):
+def activate(request):
     """ 
     Intermediate view to activate a user's email. 
     """
+    uid  = request.POST.get('uid')
+    token = request.POST.get('token')
     headers={'Authorization': 'JWT ' + token}
     protocol = 'https://' if request.is_secure() else 'http://'
     web_url = protocol + request.get_host()
@@ -61,9 +63,17 @@ def activate(request, uid, token):
     content = result.text
     print(content)
 
-    return Response(content)
+    if result.status_code == status.HTTP_200_OK:
+        User.objects.filter(id=uid).update(is_active=True)
+        # redirect to login page
 
-
+        
+        
+        return Response({"message": "User activated successfully."}, status=status.HTTP_200_OK)
+    else:
+        
+        return Response({"message": "User activation failed."}, status=status.HTTP_400_BAD_REQUEST)
+ 
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
