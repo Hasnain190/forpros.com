@@ -14,7 +14,7 @@ import LoginScreen from './screens/AccountScreens/LoginScreen'
 import RegisterScreen from './screens/AccountScreens/RegisterScreen'
 import ActivateScreen from './screens/AccountScreens/ActivateScreen';
 
-import GoogleScreen from './screens/AccountScreens/GoogleScreen';
+
 
 import ResetPasswordScreen from './screens/AccountScreens/ResetPasswordScreen';
 import ResetPasswordConfirmScreen from './screens/AccountScreens/ResetPasswordConfirmScreen';
@@ -43,13 +43,10 @@ import AboutUsScreen from './screens/BlogScreens/AboutUsScreen.js';
 import FAQScreen from './screens/BlogScreens/FAQScreen'
 import PrivacyPolicyScreen from './screens/BlogScreens/PrivacyPolicyScreen'
 import TermsAndConditionsScreen from './screens/BlogScreens/TermsAndConditionsScreen'
-
-// import Google from './containers/Google';
-
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, useLocation } from 'react-router-dom'
 // import sidebar from ''
-import './scss/style.scss'
+
 
 function App() {
 
@@ -67,7 +64,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Route path="/" component={HomeScreen} exact />
-          <Route exact path='/google' component={GoogleScreen} />
+         
 
           <Route path="/category/:id" component={CategoricallyProductsScreen} exact />
 

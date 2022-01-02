@@ -32,17 +32,7 @@ function LoginScreen({ location, history }) {
         e.preventDefault()
         dispatch(login(email, password))
     }
-    const continueWithGoogle = async () => {
-        try {
-            const res = await axios.get(`http://127.0.0.1:8000/auth/o/google-oauth2/?redirect_uri=http://127.0.0.1:8000/google`)
-
-            window.location.replace(res.data.authorization_url);
-            console.log(res.data.authorization_ur)
-        } catch (err) {
-            console.log(err)
-
-        }
-    };
+   
     return (
         <FormContainer>
             <h1>Sign In</h1>
@@ -51,9 +41,9 @@ function LoginScreen({ location, history }) {
             <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='email'>
-                    <Form.Label>Email Address</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
-                        type='email'
+                        type='text'
                         placeholder='Enter Email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -92,15 +82,7 @@ function LoginScreen({ location, history }) {
             
             </Col>
             </Row>
-            <Row className='py-3'>
-                <Col>
-                <button className="btn btn-outline-danger rounded-pill" onClick = {continueWithGoogle}>
-                <i class="fab fa-google p-1"></i>
-                    Continue with GOOGLE
-                </button>
-                  
-                </Col>
-            </Row>
+           
 
         </FormContainer>
     )

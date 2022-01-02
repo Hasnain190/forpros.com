@@ -15,9 +15,7 @@ import {
     USER_ACTIVATE_SUCCESS,
     USER_ACTIVATE_FAIL,
 
-    GOOGLE_AUTH_SUCCESS,
-    GOOGLE_AUTH_FAIL,
-
+ 
     USER_PASSWORD_RESET_REQUEST,
     USER_PASSWORD_RESET_SUCCESS,
     USER_PASSWORD_RESET_FAIL,
@@ -140,12 +138,12 @@ export const register = (username, email, password, re_password) => async (dispa
             payload: data
         })
 //  I  commented out this  so that I can test the user log in and sign up faster ... I will uncomment this later InshaAllah
-        dispatch({
-            type: USER_LOGIN_SUCCESS,
-            payload: data
-        })
+        // dispatch({
+        //     type: USER_LOGIN_SUCCESS,
+        //     payload: data
+        // })
 
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        // localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {
         dispatch({
@@ -198,50 +196,6 @@ export const activate = (uid, token) => async (dispatch) => {
 }
 // && !localStorage.getItem('userInfo')
 
-export const googleAuthenticate = (state, code) => async dispatch => {
-    if (state && code ) {
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        };
-
-        const details = {
-            'state': state,
-            'code': code
-        };
-
-        const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
-
-        try {
-            const { data } = await axios.post(`http://127.0.0.1:8000/auth/o/google-oauth2/?${formBody}`, config);
-
-            dispatch({
-                type: GOOGLE_AUTH_SUCCESS,
-                payload: data
-            });
-            
-            // dispatch(getUserDetails());
-            dispatch({
-                type: USER_LOGIN_SUCCESS,
-                payload: {
-                    token: data.access,
-                    refresh: data.refresh,
-                    access: data.access,
-                    email: data.user,
-                    name: data.user
-                }
-            })
-        } catch (error) {
-            dispatch({
-                type: GOOGLE_AUTH_FAIL,
-                payload: error.response && error.response.data.detail
-                    ? error.response.data.detail
-                    : error.message,
-            });
-        }
-    }
-};
 
 export const getUserDetails = () => async (dispatch, getState) => {
     try {
@@ -427,7 +381,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/update/${user._id}/`,
+            `/api/users/update/${user.id}/`,
             user,
             config
         )

@@ -16,7 +16,7 @@ from django.core.mail import message, send_mail
 def addOrderItems(request):
     user = request.user
     data = request.data
-    print(data)
+
 
     orderItems = data['orderItems']
 

@@ -24,7 +24,7 @@ import {
     userLoginReducer,
     userRegisterReducer,
     userActivateReducer,
-    googleAuthenticateReducer,
+ 
     userDetailsReducer,
     userUpdateProfileReducer,
     userListReducer,
@@ -77,7 +77,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userActivate:userActivateReducer,
 
-    googleAuthenticate:googleAuthenticateReducer,
+  
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     userList: userListReducer,

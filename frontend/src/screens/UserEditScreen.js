@@ -22,6 +22,7 @@ function UserEditScreen({ match, history }) {
 
 
     const userDetails = useSelector(state => state.userDetails)
+
     const { error, loading, user } = userDetails
 
     const userUpdate = useSelector(state => state.userUpdate)
@@ -35,20 +36,23 @@ function UserEditScreen({ match, history }) {
             history.push('/admin/userlist')
         } else {
 
-            if (!user.name || user._id !== Number(userId)) {
+            if (!user.name || Number(user.id )!== Number(userId)) {
                 dispatch(getUserDetails())
             } else {
                 setName(user.name)
                 setEmail(user.email)
                 setAdmin(user.isAdmin)
+               
             }
         }
-
-    }, [dispatch ,user, userId, successUpdate, history])
+        console.log('user.id',user.id)
+        console.log('userID',userId)
+        
+    }, [dispatch ,userId,user.id, successUpdate, history])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(updateUser({ _id: user._id, name, email, isAdmin }))
+        dispatch(updateUser({ id: Number(user.id), name, email, isAdmin }))
         
 
 

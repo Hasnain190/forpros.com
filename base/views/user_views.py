@@ -2,7 +2,7 @@
 from rest_framework.decorators import api_view , permission_classes , authentication_classes
 from rest_framework.permissions import IsAuthenticated , IsAdminUser
 from rest_framework.response import Response
-
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -16,9 +16,9 @@ from rest_framework import status
 from base.serializers import  UserSerializer , UserSerializerWithToken
 
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
+# User = settings.AUTH_USER_MODEL
 # from django.contrib.auth import get_user_model
-# User = get_user_model()
+User = get_user_model()
 
 
 import requests

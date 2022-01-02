@@ -14,11 +14,6 @@ import {
     USER_ACTIVATE_SUCCESS,
     USER_ACTIVATE_FAIL,
 
-    GOOGLE_AUTH_SUCCESS,
-    GOOGLE_AUTH_FAIL,
-
-    
-
     USER_PASSWORD_RESET_REQUEST,
     USER_PASSWORD_RESET_SUCCESS,
     USER_PASSWORD_RESET_FAIL,
@@ -111,21 +106,6 @@ export const userActivateReducer = (state = {}, action) => {
             return { loading: false, success:true , userInfo: action.payload }
 
         case USER_ACTIVATE_FAIL:
-            return { loading: false, error: action.payload }
-
-     
-        default:
-            return state
-    }
-}
-
-export const googleAuthenticateReducer = (state = {}, action) => {
-    switch (action.type) {
-     
-        case GOOGLE_AUTH_SUCCESS:
-            return { loading: false, success:true , userInfo: action.payload }
-
-        case GOOGLE_AUTH_FAIL:
             return { loading: false, error: action.payload }
 
      

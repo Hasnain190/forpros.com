@@ -3,7 +3,6 @@ import { Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import queryString from 'query-string';
-import { googleAuthenticate } from '../actions/userActions'
 import { useLocation } from 'react-router-dom'
 
 
@@ -51,10 +50,8 @@ function HomeScreen({ history }) {
         // setMessage('')
         // console.log(products.length)
         console.log(message)
-        if (state && code) {
-            dispatch(googleAuthenticate(state, code));
-          }
-    }, [code, dispatch, keyword, message, state, successRegister]
+        
+    }, [ dispatch, keyword, message,  successRegister]
     )
 const searchTerm = keyword.split('=')[1]
 const searchResults =  Number(products.length)
