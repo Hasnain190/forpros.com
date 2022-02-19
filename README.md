@@ -16,12 +16,12 @@
 
 # Download & Setup Instructions
 
-- 1 - Clone project:`git clone https://github.com/Hasnain190/usama-computers`
-- 2 - `cd proshop_django`
-- 3 - Create virtual environment: `virtualenv myenv`
+- 1 - Clone project:`git clone https://github.com/Hasnain190/forpros.com`
+- 2 - `cd forpros.com`
+- 3 - Create virtual environment:`virtualenv myenv`
 - 4 - `myenv\scripts\activate`
-- 5 - `pip install -r requirements.txt`
-- 6 - `python manage.py runserver`
+- 5 -`pip install -r requirements.txt `
+- 6 - `python3 manage.py runserver`
 
 # Install react modules
 
