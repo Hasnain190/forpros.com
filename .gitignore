@@ -1,1 +1,4 @@
-myenv/
+/env
+env/
+/node_modules
+passoword.py
