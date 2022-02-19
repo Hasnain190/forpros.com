@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button, Row, Col } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -8,24 +8,25 @@ import { listOrders } from '../actions/orderActions'
 
 function OrderListScreen({ history }) {
 
+    const dispatch = useDispatch()
+
+    const orderList = useSelector(state => state.orderList)
+    const { loading, error, orders } = orderList
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const dispatch = useDispatch()
-    const { orders, loading, error } = useSelector(state => state.orderList)
 
 
     useEffect(() => {
-
         if (userInfo && userInfo.isAdmin) {
             dispatch(listOrders())
         } else {
             history.push('/login')
         }
 
+    }, [dispatch, history, userInfo])
 
-    }, [dispatch, userInfo, history]
-    )
 
     return (
         <div>
@@ -41,7 +42,7 @@ function OrderListScreen({ history }) {
                                     <th>ID</th>
                                     <th>USER</th>
                                     <th>DATE</th>
-                                    <th>PRICE</th>
+                                    <th>Total</th>
                                     <th>PAID</th>
                                     <th>DELIVERED</th>
                                     <th></th>
@@ -53,23 +54,25 @@ function OrderListScreen({ history }) {
                                     <tr key={order._id}>
                                         <td>{order._id}</td>
                                         <td>{order.user && order.user.name}</td>
-
                                         <td>{order.createdAt.substring(0, 10)}</td>
-                                        <td>{order.totalPrice}</td>
+                                        <td>${order.totalPrice}</td>
 
                                         <td>{order.isPaid ? (
-                                            (order.paidAt)
+                                            order.paidAt.substring(0, 10)
                                         ) : (
-                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                        )}</td>
+                                            <i className='fas fa-check' style={{ color: 'red' }}></i>
+                                        )}
+                                        </td>
+
                                         <td>{order.isDelivered ? (
-                                            (order.deliveredAt.substring(0, 10))
+                                            order.deliveredAt.substring(0, 10)
                                         ) : (
-                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                        )}</td>
+                                            <i className='fas fa-check' style={{ color: 'red' }}></i>
+                                        )}
+                                        </td>
 
                                         <td>
-                                            <LinkContainer to={`/order/${order._id}/`}>
+                                            <LinkContainer to={`/order/${order._id}`}>
                                                 <Button variant='light' className='btn-sm'>
                                                     Details
                                                 </Button>
@@ -84,8 +87,6 @@ function OrderListScreen({ history }) {
                     )}
         </div>
     )
-
 }
 
 export default OrderListScreen
-

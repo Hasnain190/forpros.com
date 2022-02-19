@@ -11,8 +11,8 @@ function Footer() {
                     <h2>About Us</h2>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium ut iste laboriosam dolore deleniti sit, nobis assumenda aspernatur voluptates. Eum, veritatis? Exercitationem pariatur nisi quos aperiam a fugiat recusandae suscipit.</p>
                     <ul className='sci'>
-                        <li><a href="https://www.facebook.com/itsUsamaAshfaq" target='_blank'><i class="fab fa-facebook-square" aria-hidden='true'></i></a></li>
-                        <li><a href="https://www.instagram.com/usamaashfaq6364/" target='_blank' ><i class="fab fa-instagram" aria-hidden='true'></i></a></li>
+                        <li><a href="https://www.facebook.com/itsUsamaAshfaq" rel="noreferrer" target='_blank'><i className="fab fa-facebook-square" aria-hidden='true'></i></a></li>
+                        <li><a href="https://www.instagram.com/usamaashfaq6364/" rel="noreferrer" target='_blank' ><i className="fab fa-instagram" aria-hidden='true'></i></a></li>
 
                     </ul>
 
@@ -21,36 +21,36 @@ function Footer() {
                     <h2>Quick Links</h2>
                     <ul>
                         <li><Link to="/about-us">
-                            
-                                About
-                            
+
+                            About
+
 
 
                         </Link></li>
                         <li><Link to="faqs">
-                            
-                                FAQs
-                            
+
+                            FAQs
+
 
                         </Link> </li>
                         <li><Link to="/privacy-policy">
-                         
 
-                                Privacy Policy
-                         
+
+                            Privacy Policy
+
 
                         </Link> </li>
-                       
-                        <li><Link to="/terms-and-conditions">
-                            
-                                Terms & Condition
 
-                            
+                        <li><Link to="/terms-and-conditions">
+
+                            Terms & Condition
+
+
                         </Link> </li>
                         <li><Link to="/contact-us">
-                            
-                                Contact
-                          
+
+                            Contact
+
                         </Link> </li>
                     </ul>
 
@@ -60,15 +60,15 @@ function Footer() {
 
                     <ul className="info">
                         {/* <li>
-                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span><i className="fas fa-map-marker-alt"></i></span>
                             <span><a href="https://goo.gl/maps/9C5xdh5W1XVihmb48" target='_blank' rel="noreferrer"> D-XXX , Thermal Power Station <br />Muzzaffargarh 34200 <br />Pakistan</a></span>
                         </li> */}
                         <li>
-                            <span><i class="fas fa-phone-alt"></i></span>
+                            <span><i className="fas fa-phone-alt"></i></span>
                             <p><a href="tel:923174373258">+92 311 7907036</a></p>
                         </li>
                         <li>
-                            <span><i class="far fa-envelope"></i></span>
+                            <span><i className="far fa-envelope"></i></span>
                             <p><a href="mailto:s20755753@gmail.com">s20755753@gmail.com</a></p>
                         </li>
 

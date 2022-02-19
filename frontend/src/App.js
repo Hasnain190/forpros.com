@@ -14,12 +14,6 @@ import OrderScreen from './screens/OrderScreen'
 
 import LoginScreen from './screens/AccountScreens/LoginScreen'
 import RegisterScreen from './screens/AccountScreens/RegisterScreen'
-import ActivateScreen from './screens/AccountScreens/ActivateScreen';
-
-
-
-import ResetPasswordScreen from './screens/AccountScreens/ResetPasswordScreen';
-import ResetPasswordConfirmScreen from './screens/AccountScreens/ResetPasswordConfirmScreen';
 
 
 import ProfileScreen from './screens/ProfileScreen'
@@ -46,7 +40,7 @@ import FAQScreen from './screens/BlogScreens/FAQScreen'
 import PrivacyPolicyScreen from './screens/BlogScreens/PrivacyPolicyScreen'
 import TermsAndConditionsScreen from './screens/BlogScreens/TermsAndConditionsScreen'
 import { Container } from "react-bootstrap";
-import { BrowserRouter as Router, Route, useLocation, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, } from 'react-router-dom'
 
 
 
@@ -74,11 +68,6 @@ function App() {
 
           <Route path="/login" component={LoginScreen} exact />
           <Route path='/register' component={RegisterScreen} exact />
-          <Route path='/activate/:id/:token' component={ActivateScreen} exact />
-
-
-          <Route path='/reset-password' component={ResetPasswordScreen} exact />
-          <Route path='/password/reset/confirm/:id/:token' component={ResetPasswordConfirmScreen} exact />
 
 
           <Route path='/profile' component={ProfileScreen} exact />
@@ -89,6 +78,7 @@ function App() {
           <Route path='/how-to-pay' component={HowToPayScreen} exact />
           <Route path='/order/:id' component={OrderScreen} exact />
 
+
           <Route path='/admin/userlist' component={UserListScreen} exact />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} exact />
           <Route path='/admin/productlist' component={ProductListScreen} exact />
@@ -96,11 +86,13 @@ function App() {
 
           <Route path="/admin/categorylist" component={CategoryListScreen} exact />
           <Route path="/admin/categorylist/:id/edit" component={CategoryEditScreen} exact />
+          <Route path='/admin/product/:id/edit' component={ProductEditScreen} exact />
+
+
 
 
 
           <Route path="/product/:id" component={ProductScreen} exact />
-          <Route path='/admin/product/:id/edit' component={ProductEditScreen} exact />
 
 
 

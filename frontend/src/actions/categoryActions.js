@@ -2,7 +2,7 @@ import {
     CATEGORY_CREATE_REQUEST,
     CATEGORY_CREATE_SUCCESS,
     CATEGORY_CREATE_FAIL,
-    CATEGORY_CREATE_RESET,
+
 
     PRODUCT_CATEGORY_REQUEST,
     PRODUCT_CATEGORY_SUCCESS,
@@ -12,7 +12,7 @@ import {
     PRODUCT_CATEGORY_LIST_REQUEST,
     PRODUCT_CATEGORY_LIST_SUCCESS,
     PRODUCT_CATEGORY_LIST_FAIL,
-    
+
     CATEGORY_DELETE_REQUEST,
     CATEGORY_DELETE_SUCCESS,
     CATEGORY_DELETE_FAIL,
@@ -24,7 +24,7 @@ import {
     CATEGORY_EDIT_REQUEST,
     CATEGORY_EDIT_SUCCESS,
     CATEGORY_EDIT_FAIL,
-    CATEGORY_EDIT_RESET,
+
 
 } from '../constants/categoryConstants'
 import axios from 'axios'
@@ -70,7 +70,7 @@ export const createCategory = () => async (dispatch, getState) => {
 }
 
 
-export const editCategory = (product_category,id) => async (dispatch, getState) => {
+export const editCategory = (product_category, id) => async (dispatch, getState) => {
     try {
         dispatch({
             type: CATEGORY_EDIT_REQUEST
@@ -113,22 +113,22 @@ export const editCategory = (product_category,id) => async (dispatch, getState) 
 }
 
 
-export const includeCategory = (categoryId,productId) => async (dispatch) => {
+export const includeCategory = (categoryId, productId) => async (dispatch) => {
     try {
         dispatch({ type: CATEGORY_INCLUDE_REQUEST })
-        
-        
+
+
         const formDataForCat = new FormData()
         formDataForCat.append('product_id', productId)
 
-        
+
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }
         const { data } = await axios.put(`/api/category/update/${categoryId}/`, formDataForCat, config)
-        
+
         console.log(data)
         dispatch({
             type: CATEGORY_INCLUDE_SUCCESS,
@@ -167,7 +167,7 @@ export const categoryProducts = () => async (dispatch) => {
     }
 }
 
- 
+
 
 export const categoryListProducts = (id) => async (dispatch) => {
     try {

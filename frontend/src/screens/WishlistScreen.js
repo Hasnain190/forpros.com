@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button } from 'react-bootstrap'
 
-import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { addToWishlist , removeFromWishlist } from '../actions/wishlistActions'
+import { addToWishlist, removeFromWishlist } from '../actions/wishlistActions'
 
-function WishlistScreen({ history , match }) {
+function WishlistScreen({ history, match }) {
     const productId = match.params.id
-   
+
     const dispatch = useDispatch()
     const wishlist = useSelector(state => state.wishlist)
     const { wishlistItems } = wishlist
     useEffect(
         () => {
             if (productId) {
-             
+
                 dispatch(addToWishlist(productId))
             }
-            console.log('id',productId)
+            console.log('id', productId)
         }, [dispatch, productId]
     )
     const removeFromWishlistHandler = (id) => {
@@ -35,22 +34,22 @@ function WishlistScreen({ history , match }) {
                         Your Wishlist is empty <Link to='/'>Go Back</Link>
                     </Message>
                 ) : (
-                        <ListGroup variant='flush'>
-                            {wishlistItems.map(item => (
-                                <ListGroup.Item key={item.product}>
-                                    <Row>
-                                        <Col md={2}>
-                                             <Image src={item.image} alt={item.name} fluid rounded />
-                                        </Col>
-                                        <Col md={3}>
-                                            <Link to={`/product/${item.product}`}>{item.name}</Link>
-                                        </Col>
+                    <ListGroup variant='flush'>
+                        {wishlistItems.map(item => (
+                            <ListGroup.Item key={item.product}>
+                                <Row>
+                                    <Col md={2}>
+                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                    </Col>
+                                    <Col md={3}>
+                                        <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                    </Col>
 
-                                        <Col md={2}>
-                                            {item.price}/-PKR
-                                        </Col>
+                                    <Col md={2}>
+                                        {item.price}/-PKR
+                                    </Col>
 
-                                        {/* <Col md={3}>
+                                    {/* <Col md={3}>
                                             <Form.Control
                                                 as="select"
                                                 value={item.qty}
@@ -68,20 +67,20 @@ function WishlistScreen({ history , match }) {
                                             </Form.Control>
                                         </Col> */}
 
-                                        <Col md={1}>
-                                            <Button
-                                                type='button'
-                                                variant='light'
-                                                onClick={() => removeFromWishlistHandler(item.product)}
-                                            >
-                                                <i className='fas fa-trash'></i>
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
-                    )}
+                                    <Col md={1}>
+                                        <Button
+                                            type='button'
+                                            variant='light'
+                                            onClick={() => removeFromWishlistHandler(item.product)}
+                                        >
+                                            <i className='fas fa-trash'></i>
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                )}
             </Col>
 
             {/* <Col md={4}>

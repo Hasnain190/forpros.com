@@ -12,7 +12,7 @@ function PaymentScreen({ history }) {
 
     const dispatch = useDispatch()
 
-    const [paymentMethod, setPaymentMethod] = useState('')
+    const [paymentMethod, setPaymentMethod] = useState('PayPal')
 
     if (!shippingAddress.address) {
         history.push('/shipping')
@@ -22,11 +22,6 @@ function PaymentScreen({ history }) {
         e.preventDefault()
         dispatch(savePaymentMethod(paymentMethod))
         history.push('/placeorder')
-        // console.log(paymentMethod)
-        // window.onclick = e => {
-        //     console.dir(e.target);  // use this in chrome
-        //     // console.log(e.target);  // use this in firefox - click on tag name to view 
-        // }  
     }
 
     return (
@@ -37,22 +32,13 @@ function PaymentScreen({ history }) {
                 <Form.Group>
                     <Form.Label as='legend'>Select Method</Form.Label>
                     <Col>
-                        {/* <Form.Check
-                            type='radio'
-                            label='PayPal or Credit Card'
-                            id='paypal'
-                            name='paymentMethod'
-                            
-                            onChange={(e) => setPaymentMethod(e.target.value)}
-                        >
 
-                        </Form.Check> */}
                         <Form.Check
                             type='radio'
                             label='Easypaisa'
                             id='Easypaisa'
                             name='paymentMethod'
-                         
+
                             onChange={(e) => setPaymentMethod(e.target.id)}
                         >
 

@@ -6,8 +6,6 @@ import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
 import { login } from '../../actions/userActions'
-import axios from 'axios'
-
 
 function LoginScreen({ location, history }) {
     const [email, setEmail] = useState('')
@@ -19,20 +17,18 @@ function LoginScreen({ location, history }) {
 
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
-// 
+
     useEffect(() => {
-        if (userInfo ) {
+        if (userInfo) {
             history.push(redirect)
         }
-        // console.log(redirect)
-        //  console.log(location)
     }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(login(email, password))
     }
-   
+
     return (
         <FormContainer>
             <h1>Sign In</h1>
@@ -41,9 +37,9 @@ function LoginScreen({ location, history }) {
             <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='email'>
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label>Email Address</Form.Label>
                     <Form.Control
-                        type='text'
+                        type='email'
                         placeholder='Enter Email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -76,13 +72,7 @@ function LoginScreen({ location, history }) {
                     </Link>
                 </Col>
             </Row>
-            <Row className='py-3'>
-            <Col>
-                Forgot your Password? <Link to='/reset-password'>Reset Password</Link>
-            
-            </Col>
-            </Row>
-           
+
 
         </FormContainer>
     )

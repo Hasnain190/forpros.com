@@ -1,4 +1,4 @@
-#!/home/hasnain/forpros.com/env/bin/python3
+#!/home/hasnain/proshop_django/env/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

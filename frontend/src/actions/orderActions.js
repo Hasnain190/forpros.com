@@ -11,13 +11,11 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
-    ORDER_PAY_RESET,
 
 
     ORDER_LIST_MY_REQUEST,
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
-
 
 
     ORDER_LIST_REQUEST,
@@ -29,6 +27,7 @@ import {
     ORDER_DELIVER_FAIL,
 
 } from '../constants/orderConstants'
+
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
 
@@ -45,7 +44,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': `JWT ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
@@ -92,7 +91,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `JWT ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
@@ -118,35 +117,29 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 }
 
 
-export const payOrder = (order) => async (dispatch, getState) => {
-    const {
-        userLogin: { userInfo },
-    } = getState()
 
-    const config = {
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': `JWT ${userInfo.token}`
-        }
-
-    }
-
-
-    const { data } = await axios.put(
-        `/api/orders/${order._id}/pay/`,
-        {},  // yeh kia cheez hai bhai ???
-        config
-    )
-
-
+export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ORDER_PAY_REQUEST
         })
 
+        const {
+            userLogin: { userInfo },
+        } = getState()
 
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
 
-
+        const { data } = await axios.put(
+            `/api/orders/${id}/pay/`,
+            {},
+            config
+        )
 
         dispatch({
             type: ORDER_PAY_SUCCESS,
@@ -178,7 +171,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': `JWT ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
@@ -205,6 +198,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
 }
 
 
+
 export const listMyOrders = () => async (dispatch, getState) => {
     try {
         dispatch({
@@ -218,7 +212,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `JWT ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
@@ -257,7 +251,7 @@ export const listOrders = () => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `JWT ${userInfo.token}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
@@ -281,4 +275,3 @@ export const listOrders = () => async (dispatch, getState) => {
         })
     }
 }
-

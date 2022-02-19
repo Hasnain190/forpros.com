@@ -1,8 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-
 import Rating from './Rating'
+import { Link } from 'react-router-dom'
 
 function Product({ product }) {
     return (
@@ -10,8 +9,9 @@ function Product({ product }) {
             <Link to={`/product/${product._id}`}>
                 <Card.Img src={product.image} />
             </Link>
+
             <Card.Body>
-                <Link  to={`/product/${product._id}`}>
+                <Link to={`/product/${product._id}`}>
                     <Card.Title as="div">
                         <strong>{product.name}</strong>
                     </Card.Title>
@@ -25,7 +25,7 @@ function Product({ product }) {
 
 
                 <Card.Text as="h3">
-                    {product.price}/-PKR
+                    ${product.price}
                 </Card.Text>
             </Card.Body>
         </Card>

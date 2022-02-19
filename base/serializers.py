@@ -1,29 +1,25 @@
 from rest_framework import serializers
-# from django.contrib.auth.models import User
-from .models import Product, Order, OrderItem, ProductCatogory, ShippingAddress, Review , WishList , Media , User
+from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
+from backend.settings import MEDIA_URL
+from .models import Media, Product, Order, OrderItem, ProductCatogory, ShippingAddress, Review, WishList,  User
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
-  
 
     class Meta:
         model = User
-        fields = ['id', '_id', 'username', 'email', 'name','isAdmin']
-     
+        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin']
 
     def get__id(self, obj):
         return obj.id
 
     def get_isAdmin(self, obj):
         return obj.is_staff
-     
 
     def get_name(self, obj):
         name = obj.first_name
@@ -38,21 +34,13 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-   
-
-        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin' ,'token']
+        fields = ['id', '_id', 'username', 'email', 'name', 'isAdmin', 'token']
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
 
-class ReviewSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Review
-        fields = '__all__'
-        
 class ProductCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -60,31 +48,23 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
-    media = serializers.SerializerMethodField(read_only=True)
-    
+
     class Meta:
         model = Product
         fields = '__all__'
 
     def get_reviews(self, obj):
         reviews = obj.review_set.all()
-        serializers = ReviewSerializer(reviews , many = True)
-        return serializers.data
-
-    def get_media(self,obj):
-        media = obj.media_set.all()
-        serializers = MediaSerializer(media, many = True)
-        return serializers.data
-
-
-
-class MediaSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Media
-        fields = '__all__'
+        serializer = ReviewSerializer(reviews, many=True)
+        return serializer.data
 
 
 class ShippingAddressSerializer(serializers.ModelSerializer):
@@ -130,7 +110,6 @@ class OrderSerializer(serializers.ModelSerializer):
 class WishListSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(read_only=True)
 
-
     class Meta:
         model = WishList
         fields = '__all__'
@@ -139,3 +118,10 @@ class WishListSerializer(serializers.ModelSerializer):
         user = obj.user
         serializer = UserSerializer(user, many=False)
         return serializer.data
+
+
+class MediaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Media
+        fields = '__all__'

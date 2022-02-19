@@ -9,5 +9,3 @@ def updateUser(sender, instance, **kwargs):
 
 
 pre_save.connect(updateUser, sender=User)
-
-

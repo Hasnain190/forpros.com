@@ -22,7 +22,7 @@ function ProductEditScreen({ match, history }) {
     const [image3, setImage3] = useState('')
     const [image4, setImage4] = useState('')
     const [image5, setImage5] = useState('')
-    const [video, setVideo] = useState('')
+
     const [brand, setBrand] = useState('')
     const [category, setCategory] = useState('')
     const [Featured, setFeatured] = useState(false)
@@ -58,11 +58,10 @@ function ProductEditScreen({ match, history }) {
                 setName(product.name)
                 setPrice(product.price)
                 setImage(product.image)
-                setBannerImage(product.media.bannerImage)
-                setImage3(product.media.image3)
-                setImage4(product.media.image4)
-                setImage5(product.media.image5)
-                setVideo(product.media.video)
+                setBannerImage(product?.media?.bannerImage)
+                setImage3(product?.media?.image3)
+                setImage4(product?.media?.image4)
+                setImage5(product?.media?.image5)
                 setBrand(product.brand)
                 setFeatured(product.Featured)
                 setCategory(product.category)
@@ -82,7 +81,7 @@ function ProductEditScreen({ match, history }) {
             _id: productId,
             name,
             price,
-            image, bannerImage, image3, image4, image5, video,
+            image, bannerImage, image3, image4, image5,
             Featured,
             brand,
             category,
@@ -97,7 +96,7 @@ function ProductEditScreen({ match, history }) {
         setCategory(product.category)
 
     }
-    
+
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
         const formData = new FormData()
@@ -105,7 +104,6 @@ function ProductEditScreen({ match, history }) {
         formData.append('image', file)
         formData.append('product_id', productId)
 
-        console.log(e.target.files[0])
         setUploading(true)
 
         try {
@@ -125,9 +123,6 @@ function ProductEditScreen({ match, history }) {
             setUploading(false)
         }
     }
-
-
-
     return (
         <div>
             <Link to='/admin/productlist/'>
@@ -272,28 +267,7 @@ function ProductEditScreen({ match, history }) {
 
                                 </Form.Group>
                             }
-                            <Form.Group controlId='image'>
-                                <Form.Label>Add Video 📺</Form.Label>
-                                <Form.Control
 
-                                    type='text'
-                                    placeholder='Enter video'
-                                    value={video}
-                                    onChange={(e) => setImage(e.target.value)}
-                                >
-                                </Form.Control>
-
-                                <Form.File
-                                    id='image-file'
-                                    label=''
-                                    // custom
-                                    onChange={uploadFileHandler}
-                                >
-
-                                </Form.File>
-                                {uploading && <Loader />}
-
-                            </Form.Group>
                             <Form.Group controlId='brand'>
                                 <Form.Label>Brand</Form.Label>
                                 <Form.Control

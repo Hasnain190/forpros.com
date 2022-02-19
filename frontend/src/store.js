@@ -23,16 +23,13 @@ import { wishlistReducer } from './reducers/wishlistReducers'
 import {
     userLoginReducer,
     userRegisterReducer,
-    userActivateReducer,
- 
+
+
     userDetailsReducer,
     userUpdateProfileReducer,
     userListReducer,
     userDeleteReducer,
     userUpdateReducer,
-    userPasswordResetReducer,
-    userPasswordResetConfirmReducer,
-
 
 } from './reducers/userReducers'
 import {
@@ -42,7 +39,6 @@ import {
     orderListMyReducer,
     orderListReducer,
     orderDeliverReducer,
-
 } from './reducers/orderReducers'
 import {
     productCategoryReducer,
@@ -75,16 +71,13 @@ const reducer = combineReducers({
 
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
-    userActivate:userActivateReducer,
 
-  
+
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     userList: userListReducer,
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
-    userPasswordReset:userPasswordResetReducer,
-    userPasswordResetConfirm:userPasswordResetConfirmReducer,
 
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,

@@ -21,7 +21,7 @@ const useClickOutside = (handler) => {
 
         return () => {
             document.removeEventListener('mousedown', mayBeHandler)
-            console.log(domNode)
+
         }
 
 
@@ -40,7 +40,7 @@ function Header() {
     const logoutHandler = () => {
         dispatch(logout())
     }
-    const [sidebar, setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(0);
 
     const showSidebar = () => setSidebar(!sidebar);
 
@@ -52,7 +52,7 @@ function Header() {
     // const fav = useSelector(state => state.whishlist)
     // const { whishlistItems } = fav
     // const noOfFavItems = whishlistItems.length
-    
+
 
     // const domNode = useRef()
 
@@ -73,7 +73,7 @@ function Header() {
 
                 <LinkContainer to='/'>
                     <Navbar.Brand >
-negozio.
+                        Usama Computers
 
                     </Navbar.Brand>
                 </LinkContainer>
@@ -81,18 +81,18 @@ negozio.
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav ">
                         <SearchBox />
-                        <Nav className= " ms-auto">
+                        <Nav className=" ms-auto">
 
-                            <LinkContainer to='/cart' className= "px-4"  >
+                            <LinkContainer to='/cart' className="px-4"  >
                                 <Nav.Link ><span className='sup '>{noOfCartItems}</span><i className="fas fa-shopping-cart"></i></Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to='/wishlist' className= "px-4"  >
+                            <LinkContainer to='/wishlist' className="px-4"  >
                                 <Nav.Link ><span className='sup '></span><i className="fas fa-heart"></i></Nav.Link>
                             </LinkContainer>
 
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
-                                    <LinkContainer to='/profile' className= "px-4" >
+                                    <LinkContainer to='/profile' className="px-4" >
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
 
@@ -100,14 +100,14 @@ negozio.
 
                                 </NavDropdown>
                             ) : (
-                                <LinkContainer to='/login' className= "px-4" >
+                                <LinkContainer to='/login' className="px-4" >
                                     <Nav.Link><i className="fas fa-user"></i></Nav.Link>
                                 </LinkContainer>
                             )}
 
 
                             {userInfo && userInfo.isAdmin && (
-                                <NavDropdown title='Admin' id='adminmenue' className= "px-4">
+                                <NavDropdown title='Admin' id='adminmenue' className="px-4">
                                     <LinkContainer to='/admin/userlist'  >
                                         <NavDropdown.Item>Users</NavDropdown.Item>
                                     </LinkContainer>
@@ -126,7 +126,7 @@ negozio.
 
                                 </NavDropdown>
                             )}
-                            <Nav.Item  ><i  className={sidebar ? "fas fa-times hamburger px-4" : "fas fa-bars hamburger px-4 display-hidden"} style = {sidebar ? {display :'none'}: {display:''}}onClick={showSidebar} /></Nav.Item>
+                            <Nav.Item  ><i className={sidebar ? "fas fa-times hamburger px-4" : "fas fa-bars hamburger px-4 display-hidden"} style={sidebar ? { display: 'none' } : { display: '' }} onClick={(e) => { showSidebar(e) }} /></Nav.Item>
 
                         </Nav>
                     </Navbar.Collapse>

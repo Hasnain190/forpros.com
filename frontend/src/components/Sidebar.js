@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Sidebar.css'
 import { useHistory } from "react-router-dom";
 
@@ -8,11 +8,8 @@ import { categoryProducts } from '../actions/categoryActions'
 import { Link } from 'react-router-dom';
 
 
-// const [sidebar, setSidebar] = useState(false);
+function Sidebar({ sidebar }) {
 
-function Sidebar({sidebar}) {
-
-    // const showSidebar = () => setSidebar(!sidebar);
 
 
     const dispatch = useDispatch()
@@ -27,8 +24,6 @@ function Sidebar({sidebar}) {
 
     useEffect(() => {
         dispatch(categoryProducts())
-
-       
 
 
     }, [dispatch])

@@ -6,10 +6,8 @@ import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-
 import { listProductDetails, createProductReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
-
 
 function ProductScreen({ match, history }) {
     const [rating, setRating] = useState(0)
@@ -120,14 +118,7 @@ function ProductScreen({ match, history }) {
 
                                                     </ListGroup.Item>
                                                 }
-                                                {
-                                                    productMedia[0]?.video && <ListGroup.Item >
 
-                                                        <video width="300" controls   >
-                                                            <source src={productMedia[0].video} type="video/mp4" />
-                                                        </video>
-                                                    </ListGroup.Item>
-                                                }
 
                                             </ListGroup>
                                         }
@@ -145,7 +136,7 @@ function ProductScreen({ match, history }) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            Price: {product.price}/-PKR
+                                            Price: {product.price}{" "}/-PKR
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -162,7 +153,7 @@ function ProductScreen({ match, history }) {
                                                 <Row>
                                                     <Col>Price:</Col>
                                                     <Col>
-                                                        <strong>{product.price} /-PKR</strong>
+                                                        <strong>{product.price}{" "} /-PKR</strong>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>
@@ -293,8 +284,6 @@ function ProductScreen({ match, history }) {
                                             )}
                                         </ListGroup.Item>
                                     </ListGroup>
-
-
 
                                 </Col>
 

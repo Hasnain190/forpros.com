@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+
 
 import { Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { categoryListProducts, categoryProducts } from '../actions/categoryActions'
+import { categoryListProducts } from '../actions/categoryActions'
 
 
 
@@ -23,7 +23,7 @@ function CategoricallyProductsScreen({ match }) {
 
     const productCategory = useSelector(state => state.productCategory)
     const { error: errorCategory, loading: loadingCategory, products: productsCategory } = productCategory
-    const x =  productsCategory.find(e => {
+    const x = productsCategory.find(e => {
         return e.id === Number(categoryId)
     })
 
@@ -43,13 +43,13 @@ function CategoricallyProductsScreen({ match }) {
     return (
         <div>
             <>
-            {loadingCategory ? (<Loader />)
-                : errorCategory ? (<Message variant='danger'>{error}</Message>)
-                    :
+                {loadingCategory ? (<Loader />)
+                    : errorCategory ? (<Message variant='danger'>{error}</Message>)
+                        :
 
-                (<h1>
-                    {y}
-                </h1>)
+                        (<h1>
+                            {y}
+                        </h1>)
 
                 }
 

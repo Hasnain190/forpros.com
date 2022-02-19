@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 
 function HowToPayScreen() {
     return (
@@ -19,12 +19,12 @@ function HowToPayScreen() {
                     <li>
                         <input type="checkbox" /> Send the screenshot to same no.
                         03174373258 via Whatsapp{" "}
-                                <a href="https://wa.me/923174373258"> 
-                        <Button variant="success">
-                            <i class="fab fa-whatsapp">Whatsapp
-                            </i>{" "}
-                           
-                        </Button>{" "}</a>
+                        <a href="https://wa.me/923174373258">
+                            <Button variant="success">
+                                <i class="fab fa-whatsapp">Whatsapp
+                                </i>{" "}
+
+                            </Button>{" "}</a>
                     </li>
                     <li>
                         Congratulation!. you are done. Your package will dispatched and

@@ -1,10 +1,9 @@
-/* main{
-  min-height: 80vh;
-} */
-
+main{
+    min-height: 80vh;
+}
 
 h1{
-  font-size: 1.8rem; 
+  font-size: 1.8rem;
   padding:1rem 0;
 }
 
@@ -14,11 +13,11 @@ h2{
 }
 
 h3{
-  padding:1rem 0;
+    padding:1rem 0;
 }
 
 .rating span{
-margin:0.1rem;
+  margin:0.1rem;
 }
 
 /* carousel */

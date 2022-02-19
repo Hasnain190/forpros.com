@@ -36,7 +36,7 @@ function RegisterScreen({ location, history }) {
         if (password !== confirmPassword) {
             setMessage('Passwords do not match')
         } else {
-            dispatch(register(name,email, password, confirmPassword))
+            dispatch(register(name, email, password))
         }
     }
 
@@ -104,15 +104,12 @@ function RegisterScreen({ location, history }) {
 
             <Row className='py-3'>
                 <Col>
-                    Have an Account ? <Link
+                    Have an Account? <Link
                         to={redirect ? `/login?redirect=${redirect}` : '/login'}>
                         Sign In
                     </Link>
                 </Col>
             </Row>
-
-          
-
         </FormContainer >
     )
 }

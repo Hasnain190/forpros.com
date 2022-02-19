@@ -5,30 +5,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
-import { getUserDetails , updateUser } from '../actions/userActions'
+import { getUserDetails, updateUser } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
-
 
 function UserEditScreen({ match, history }) {
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [isAdmin, setAdmin] = useState(false)
     const userId = match.params.id
 
-    const [message, setMessage] = useState('')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const dispatch = useDispatch()
 
-
     const userDetails = useSelector(state => state.userDetails)
-
     const { error, loading, user } = userDetails
 
     const userUpdate = useSelector(state => state.userUpdate)
-    const { error:errorUpdate, loading:loadingUpdate , success:successUpdate } = userUpdate
+    const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = userUpdate
 
-    
     useEffect(() => {
 
         if (successUpdate) {
@@ -36,26 +31,20 @@ function UserEditScreen({ match, history }) {
             history.push('/admin/userlist')
         } else {
 
-            if (!user.name || Number(user.id )!== Number(userId)) {
-                dispatch(getUserDetails())
+            if (!user.name || user._id !== Number(userId)) {
+                dispatch(getUserDetails(userId))
             } else {
                 setName(user.name)
                 setEmail(user.email)
-                setAdmin(user.isAdmin)
-               
+                setIsAdmin(user.isAdmin)
             }
         }
-        console.log('user.id',user.id)
-        console.log('userID',userId)
-        
-    }, [dispatch ,userId,user.id, successUpdate, history])
+
+    }, [user, userId, successUpdate, history])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(updateUser({ id: Number(user.id), name, email, isAdmin }))
-        
-
-
+        dispatch(updateUser({ _id: user._id, name, email, isAdmin }))
     }
 
     return (
@@ -67,7 +56,7 @@ function UserEditScreen({ match, history }) {
             <FormContainer>
                 <h1>Edit User</h1>
                 {loadingUpdate && <Loader />}
-            {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
                 {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
                     : (
@@ -101,14 +90,14 @@ function UserEditScreen({ match, history }) {
                                     type='checkbox'
                                     label='Is Admin'
                                     checked={isAdmin}
-                                    onChange={(e) => setAdmin(e.target.checked)}
+                                    onChange={(e) => setIsAdmin(e.target.checked)}
                                 >
                                 </Form.Check>
                             </Form.Group>
 
                             <Button type='submit' variant='primary'>
                                 Update
-                            </Button>
+                        </Button>
 
                         </Form>
                     )}

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 import { categoryProducts, editCategory } from '../actions/categoryActions'
-import { CATEGORY_EDIT_RESET } from '../constants/categoryConstants'
-
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 
-function CategoryEditScreen({ match , history }) {
+function CategoryEditScreen({ match, history }) {
 
     const dispatch = useDispatch()
     const [newCategory, setNewCategory] = useState('')
@@ -20,10 +18,10 @@ function CategoryEditScreen({ match , history }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('something', match.params.id,newCategory)
+        console.log('something', match.params.id, newCategory)
 
 
-        dispatch(editCategory({ product_category: newCategory}, match.params.id))
+        dispatch(editCategory({ product_category: newCategory }, match.params.id))
 
         // history.push('/admin/categorylist')
         // dispatch(categoryProducts())
@@ -34,14 +32,14 @@ function CategoryEditScreen({ match , history }) {
 
         if (successEdit) {
             setNewCategory('')
-            
+
             dispatch(categoryProducts())
-            setMessage(' Horah! Category updated successfully ✓')
+            setMessage(' Category updated successfully ✓')
         }
 
+        // console.log('this page is working')
 
-
-    }, [dispatch, successEdit ])
+    }, [dispatch, successEdit])
 
     return (
         <>
@@ -66,9 +64,9 @@ function CategoryEditScreen({ match , history }) {
 
 
 
-                <Button >
-                <i class="fas fa-check"></i>  Update
-                </Button>
+                    <Button >
+                        <i class="fas fa-check"></i>  Update
+                    </Button>
 
                 </Form.Group>
             </Form>
