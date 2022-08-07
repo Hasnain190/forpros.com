@@ -18,10 +18,11 @@
 
 - 1 - Clone project:`git clone https://github.com/Hasnain190/forpros.com`
 - 2 - `cd forpros.com`
-- 3 - Create virtual environment:`virtualenv myenv`
-- 4 - `myenv\scripts\activate`
+- 3 - Create virtual environment:`python -m venv env_name`
+- 4 - `env_name\Scripts\activate`
 - 5 -`pip install -r requirements.txt `
-- 6 - `python3 manage.py runserver`
+- 6 - make a new admin 
+- 6 - `python manage.py runserver`
 
 # Install react modules
 
