@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+"whitenoise.runserver_nostatic",
     'rest_framework',
     'corsheaders',
     'storages',
@@ -130,6 +130,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
+    db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'postgres' ,
@@ -195,8 +197,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 #AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-AWS_ACCESS_KEY_ID = "AKIAXAUIMV4EZ7RKQVB5"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID") # "AKIAXAUIMV4EZ7RKQVB5"
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY") #"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"
 AWS_STORAGE_BUCKET_NAME = 'testura'
 AWS_QUERYSTRING_AUTH = False
 
