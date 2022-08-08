@@ -34,7 +34,7 @@ function Sidebar({ sidebar }) {
 
 
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                <ul className='nav-menu-items' onClick={!sidebar}>
+                <ul className='nav-menu-items' onClick={() => !sidebar}>
                     <li className='navbar-toggle'>
                         <Link to='#' className='menu-bars'>
                             Categories

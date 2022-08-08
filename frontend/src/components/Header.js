@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navbar, Nav, NavDropdown, Container, } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+
 import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 import './CategoryList.css'
 import Sidebar from './Sidebar'
-
+import { Link } from 'react-router-dom';
 const useClickOutside = (handler) => {
     const domNode = useRef()
 
@@ -71,58 +71,58 @@ function Header() {
 
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect id='navbar-container' >
 
-                <LinkContainer to='/'>
+                <Link to='/'>
                     <Navbar.Brand >
                         Usama Computers
 
                     </Navbar.Brand>
-                </LinkContainer>
+                </Link>
                 <Container fluid>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav ">
                         <SearchBox />
                         <Nav className=" ms-auto">
 
-                            <LinkContainer to='/cart' className="px-4"  >
-                                <Nav.Link ><span className='sup '>{noOfCartItems}</span><i className="fas fa-shopping-cart"></i></Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to='/wishlist' className="px-4"  >
-                                <Nav.Link ><span className='sup '></span><i className="fas fa-heart"></i></Nav.Link>
-                            </LinkContainer>
+                            <Link to='/cart' className="px-4"  >
+                                <span className='sup '>{noOfCartItems}</span><i className="fas fa-shopping-cart"></i>
+                            </Link>
+                            <Link to='/wishlist' className="px-4"  >
+                                <span className='sup '></span><i className="fas fa-heart"></i>
+                            </Link>
 
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
-                                    <LinkContainer to='/profile' className="px-4" >
+                                    <Link to='/profile' className="px-4" >
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
-                                    </LinkContainer>
+                                    </Link>
 
                                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
 
                                 </NavDropdown>
                             ) : (
-                                <LinkContainer to='/login' className="px-4" >
-                                    <Nav.Link><i className="fas fa-user"></i></Nav.Link>
-                                </LinkContainer>
+                                <Link to='/login' className="px-4" >
+                                    <i className="fas fa-user"></i>
+                                </Link>
                             )}
 
 
                             {userInfo && userInfo.isAdmin && (
                                 <NavDropdown title='Admin' id='adminmenue' className="px-4">
-                                    <LinkContainer to='/admin/userlist'  >
+                                    <Link to='/admin/userlist'  >
                                         <NavDropdown.Item>Users</NavDropdown.Item>
-                                    </LinkContainer>
+                                    </Link>
 
-                                    <LinkContainer to='/admin/productlist' >
+                                    <Link to='/admin/productlist' >
                                         <NavDropdown.Item>Products</NavDropdown.Item>
-                                    </LinkContainer>
+                                    </Link>
 
-                                    <LinkContainer to='/admin/orderlist' >
+                                    <Link to='/admin/orderlist' >
                                         <NavDropdown.Item>Orders</NavDropdown.Item>
-                                    </LinkContainer >
+                                    </Link >
 
-                                    <LinkContainer to='/admin/categorylist'>
+                                    <Link to='/admin/categorylist'>
                                         <NavDropdown.Item>Categories</NavDropdown.Item>
-                                    </LinkContainer >
+                                    </Link >
 
                                 </NavDropdown>
                             )}
