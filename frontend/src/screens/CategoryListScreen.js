@@ -79,7 +79,7 @@ function CategoryScreen() {
                             </thead>
 
                             <tbody>
-                                {products.map(product => (
+                                {products?.map(product => (
                                     <tr key={product.id}>
                                         <td>{product.id}</td>
 

@@ -40,7 +40,7 @@ function Sidebar({ sidebar }) {
                             Categories
                         </Link>
                     </li>
-                    {products.map(product => {
+                    {products?.map(product => {
                         return (
                             <li key={product.id} className='nav-text'>
                                 <Link to={`/category/${product.id}`}>

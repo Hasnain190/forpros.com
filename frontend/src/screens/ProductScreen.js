@@ -178,7 +178,7 @@ function ProductScreen({ match, history }) {
                                                             >
                                                                 {
 
-                                                                    [...Array(product.countInStock).keys()].map((x) => (
+                                                                    [...Array(product.countInStock).keys()]?.map((x) => (
                                                                         <option key={x + 1} value={x + 1}>
                                                                             {x + 1}
                                                                         </option>
@@ -226,7 +226,7 @@ function ProductScreen({ match, history }) {
                                     {product.reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
 
                                     <ListGroup variant='flush'>
-                                        {product.reviews.map((review) => (
+                                        {product.reviews?.map((review) => (
                                             <ListGroup.Item key={review._id}>
                                                 <strong>{review.name}</strong>
                                                 <Rating value={review.rating} color='#f8e825' />

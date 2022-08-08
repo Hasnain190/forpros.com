@@ -307,7 +307,7 @@ function ProductEditScreen({ match, history }) {
                                     value={product.category}
                                     onChange={(e) => includeCategoryHandler(e.target.value, productId)}
                                 >
-                                    {productsCategory.map(product => {
+                                    {productsCategory?.map(product => {
                                         return (
                                             <option key={product.id} value={product.id}> {product.product_category}
 

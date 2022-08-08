@@ -35,7 +35,7 @@ function WishlistScreen({ history, match }) {
                     </Message>
                 ) : (
                     <ListGroup variant='flush'>
-                        {wishlistItems.map(item => (
+                        {wishlistItems?.map(item => (
                             <ListGroup.Item key={item.product}>
                                 <Row>
                                     <Col md={2}>
@@ -57,7 +57,7 @@ function WishlistScreen({ history, match }) {
                                             >
                                                 {
 
-                                                    [...Array(item.countInStock).keys()].map((x) => (
+                                                    [...Array(item.countInStock).keys()]?.map((x) => (
                                                         <option key={x + 1} value={x + 1}>
                                                             {x + 1}
                                                         </option>
