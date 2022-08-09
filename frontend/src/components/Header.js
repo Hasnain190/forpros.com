@@ -7,6 +7,7 @@ import { logout } from '../actions/userActions'
 import './CategoryList.css'
 import Sidebar from './Sidebar'
 import { Link } from 'react-router-dom';
+import { LinkContainer } from "react-router-bootstrap"
 const useClickOutside = (handler) => {
     const domNode = useRef()
 
@@ -92,37 +93,40 @@ function Header() {
 
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
-                                    <Link to='/profile' className="px-4" >
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                                    </Link>
+                                    <NavDropdown.Item href='/profile'>
+                                        Profile
+
+
+
+                                    </NavDropdown.Item>
+
 
                                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
 
                                 </NavDropdown>
                             ) : (
-                                <Link to='/login' className="px-4" >
+                                <NavDropdown.Item href='/#/login' className="px-4" >
                                     <i className="fas fa-user"></i>
-                                </Link>
+                                </NavDropdown.Item>
                             )}
 
 
                             {userInfo && userInfo.isAdmin && (
                                 <NavDropdown title='Admin' id='adminmenue' className="px-4">
-                                    <Link to='/admin/userlist'  >
-                                        <NavDropdown.Item>Users</NavDropdown.Item>
-                                    </Link>
 
-                                    <Link to='/admin/productlist' >
-                                        <NavDropdown.Item>Products</NavDropdown.Item>
-                                    </Link>
+                                    <NavDropdown.Item href='/#/admin/userlist'>Users</NavDropdown.Item>
 
-                                    <Link to='/admin/orderlist' >
-                                        <NavDropdown.Item>Orders</NavDropdown.Item>
-                                    </Link >
 
-                                    <Link to='/admin/categorylist'>
-                                        <NavDropdown.Item>Categories</NavDropdown.Item>
-                                    </Link >
+                                    <NavDropdown.Item href='/#/admin/productlist'>Products</NavDropdown.Item>
+
+
+
+                                    <NavDropdown.Item href='/#/admin/orderlist'>Orders</NavDropdown.Item>
+
+
+
+                                    <NavDropdown.Item href='/#/admin/categorylist'>Categories</NavDropdown.Item>
+
 
                                 </NavDropdown>
                             )}
@@ -132,7 +136,7 @@ function Header() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </header>
+        </header >
     )
 }
 

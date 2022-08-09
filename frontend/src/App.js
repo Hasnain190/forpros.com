@@ -63,11 +63,11 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact />
 
+          <Route path="/login" component={LoginScreen} exact />
+          <Route path='/register' component={RegisterScreen} exact />
 
           <Route path="/category/:id" component={CategoricallyProductsScreen} exact />
 
-          <Route path="/login" component={LoginScreen} exact />
-          <Route path='/register' component={RegisterScreen} exact />
 
 
           <Route path='/profile' component={ProfileScreen} exact />
