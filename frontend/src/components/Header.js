@@ -93,7 +93,7 @@ function Header() {
 
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
-                                    <NavDropdown.Item href='/profile'>
+                                    <NavDropdown.Item href='/#/profile'>
                                         Profile
 
 
